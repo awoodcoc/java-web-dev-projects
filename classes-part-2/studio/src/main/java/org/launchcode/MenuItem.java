@@ -1,32 +1,94 @@
 package org.launchcode;
 
-public class MenuItem {
-    private double price;
-    private String description;
-    private String category;
-    private boolean isNew;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
-    public MenuItem(double p, String d, String c, boolean iN) {
-        this.price = p;
-        this.description = d;
-        this.category = c;
-        this.isNew = iN;
+public class MenuItem {
+    private String name;
+    private String description;
+    private double price;
+    private String category;
+
+    private final LocalDate dateAdded;
+
+    public MenuItem(String name, String description, double price, String category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.dateAdded = LocalDate.now();
+        //TEST
+        //this.dateAdded = LocalDate.parse("2022-12-12");
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+
+    public double getPrice() {
+        return price;
+    }
+
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
     public void setCategory(String category) {
         this.category = category;
     }
 
-    public void setNew(boolean aNew) {
-        isNew = aNew;
+    public LocalDate getDateAdded() {
+        return dateAdded;
     }
-}
 
+    boolean isNew() {
+        LocalDate today = LocalDate.now();
+        double daysBetween = getDateAdded().until(today, ChronoUnit.DAYS);
+        return daysBetween < 90;
+    }
+
+    // Overridden To String
+
+    @Override
+    public String toString() {
+        String newText = isNew() ? " - NEW!" : "";
+        return name + newText + "\n" + description + " | $" + price;
+    }
+
+    // NEW EQUALS
+    @Override
+    public boolean equals(Object toBeCompared) {
+        if (this == toBeCompared) {
+            return true;
+        }
+        if (toBeCompared == null) {
+            return false;
+        }
+        if (getClass() != toBeCompared.getClass()) {
+            return false;
+        }
+        // CAST
+        MenuItem otherItem = (MenuItem) toBeCompared;
+
+        return this.name.equals(otherItem.getName());
+    }
+
+}
