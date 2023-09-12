@@ -21,11 +21,24 @@ public class BalancedBrackets {
      */
     public static boolean hasBalancedBrackets(String str) {
         int brackets = 0;
+//        Double numberCheck = Double.parseDouble(str);
+//        if (!numberCheck.isNaN()) {
+//            throw new IllegalArgumentException("String must include letters, not numbers.");
+//        }
+        if (str == "") {
+            return false;
+        }
         for (char ch : str.toCharArray()) {
+            if (ch == '{' || ch == '}') {
+                return false;
+            }
             if (ch == '[') {
                 brackets++;
             } else if (ch == ']') {
                 brackets--;
+            }
+            if (brackets < 0) {
+                return false;
             }
         }
         return brackets == 0;
