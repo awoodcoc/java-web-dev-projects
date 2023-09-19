@@ -14,20 +14,15 @@ public class DVD extends BaseDisc implements OpticalDisc {
     // in MBs
     public static final int maxCapacity = 4700;
 
-    // DEAR FUTURE ANDREW, OPTIMIZE BETTER!
-    private int minRPMs = 570;
-
-    private int maxRPMs = 1600;
-
-    public DVD(String name, String contents, int capacity, String type, String category, Double rottenTomatoesScore, boolean isMovie, boolean hasEndCreditsScene) {
-        super(name, contents, capacity, type);
+    public DVD(String name, String contents, int capacity, String type, int minRPMs, int maxRPMs, String category, Double rottenTomatoesScore, boolean isMovie, boolean hasEndCreditsScene) {
+        super(name, contents, capacity, type, minRPMs, maxRPMs);
         this.category = category;
         this.rottenTomatoesScore = rottenTomatoesScore;
         this.isMovie = isMovie;
         this.hasEndCreditsScene = hasEndCreditsScene;
     }
 
-// TODO: Determine which fields, methods, and constructors can be extended from the base class and which ones
+    // TODO: Determine which fields, methods, and constructors can be extended from the base class and which ones
     //  need to be declared separately.
 
     @Override
@@ -37,6 +32,6 @@ public class DVD extends BaseDisc implements OpticalDisc {
 
     @Override
     public void spinDisc() {
-        System.out.println("This DVD spins between " + minRPMs + " and " + maxRPMs + " rpms.");
+        System.out.println("This DVD spins between " + this.minRPMs + " and " + this.maxRPMs + " rpms.");
     }
 }

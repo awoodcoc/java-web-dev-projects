@@ -11,20 +11,14 @@ public class CD extends BaseDisc implements OpticalDisc {
     private int numTracks;
 
 
-    // DEAR FUTURE ANDREW, OPTIMIZE BETTER!
-    private int minRPMs = 200;
-
-    private int maxRPMs = 500;
-
     // in MBs
     public static final int maxCapacity = 700;
 
-    public CD(String name, String contents, int capacity, String type, String genre, int onlineScore, int numTracks) {
-        super(name, contents, capacity, type);
+    public CD(String name, String contents, int capacity, String type, int minRPMs, int maxRPMs, String genre, int onlineScore, int numTracks) {
+        super(name, contents, capacity, type, minRPMs, maxRPMs);
         this.genre = genre;
         this.onlineScore = onlineScore;
         this.numTracks = numTracks;
-
     }
 
     @Override
@@ -34,7 +28,7 @@ public class CD extends BaseDisc implements OpticalDisc {
 
     @Override
     public void spinDisc() {
-        System.out.println("This disc spins between " + minRPMs + " and " + maxRPMs + " rpms.");
+        System.out.println("This disc spins between " + this.minRPMs + " and " + this.maxRPMs + " rpms.");
     }
 
     // TODO: Determine which fields, methods, and constructors can be extended from the base class and which ones
